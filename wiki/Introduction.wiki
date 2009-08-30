@@ -16,7 +16,7 @@ Still under a lot of construction, but so far it implements the following:
 
 There's still _a lot_ more to be done, and if you can submit as many bugs/feature requests as possible!
 
-For an example configuration file check out [XMLExample]
+For an example configuration file check out [ExampleXML]
 
 
 == Notes ==
