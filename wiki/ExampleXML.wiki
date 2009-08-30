@@ -2,7 +2,8 @@
 
 = Introduction =
 
-Just a simple example XML file. Definitely not pretty.
+Just a simple example XML file. Definitely not pretty. 
+
 [http://img523.imageshack.us/img523/4152/wonkypreview3.png]
 
 
