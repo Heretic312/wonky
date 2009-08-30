@@ -1,0 +1,56 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Just a simple example XML file. Definitely not pretty.
+
+
+= Details =
+{{{
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+		Wonky config 0.001 ALPHA by ikex <aktowns@gmail.com>
+		Still alot more work to be done, but so far this contains a full WMI implementation
+		i would like to add alot more helper commands (IE checkfill)
+		Maybe some conversion commands from bytes to kbytes and etc
+		but all in good time :)
+-->
+<WonkyConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Height>500</Height>
+	<Width>700</Width>
+	<LocationX>300</LocationX>
+	<LocationY>300</LocationY>
+	<DefaultFont>Segoe UI</DefaultFont>
+	<DefaultFontSize>10</DefaultFontSize>
+    <DefaultFontColour>AntiqueWhite</DefaultFontColour>
+	<Sections>testsection</Sections>
+	<RefreshRate>5000</RefreshRate> <!-- Milliseconds -->
+	<WMIRefreshRate>60000</WMIRefreshRate> <!-- Set it too low and things tend to get funky ;) [ALWAYS KEEP ABOVE RefreshRate]-->
+  <Blocks>
+	<!--Images! -->
+	<Block x="0" y="0" w="24" h="24" line="{IMAGE.'Win.png'}" />
+	<!-- WMI EXAMPLES -->
+	<Block x="26" y="0" line="{WMI.OperatingSystem.Caption} ({WMI.OperatingSystem.OSArchitecture}) [{WMI.OperatingSystem.Version}]" />
+    <Block x="20" y="20" line="CPU: {WMI.Processor.Name} ({WMI.Processor.SocketDesignation})" />
+	<Block x="20" y="35" line="Clock Speed: {WMI.Processor.MaxClockSpeed}" />
+	<!-- WMI EXAMPLES WITH MULTIPLE PARAMETERS -->
+	<Block Section="testsection" x="20" y="50" line="HDD0: {WMI.Volume.Name:0}" />
+	<Block Section="testsection" x="80" y="50" line="{CHECKFILL.WMI.Volume.Label:0} ({WMI.Volume.Label:0})" /> <!-- Only show volume label, if it exists -->
+	<Block Section="testsection" x="20" y="65" line="HDD1: {WMI.Volume.Name:1}" />
+	<Block Section="testsection" x="80" y="65" line="{CHECKFILL.WMI.Volume.Label:1} ({WMI.Volume.Label:1})" /> <!-- Only show volume label, if it exists -->
+	<!-- EXECUTION EXAMPLE -->
+	<!-- 
+		Execution works like EXEC.'path/to/file <params>':<linetoreturn>
+		in the example below we also use CONV.REM to remove characters starting from 1 to 37 "Hostname . . . . . . . . . "
+	-->
+	<Block x="20" y="80" line="Hostname: {CONV.REM.EXEC.'ipconfig /all':3|0,37}" /> <!-- Also allows to call scripts  EXEC.'C:\python\python.exe myscript.py -->
+	<!-- CHECKFILL EXAMPLE -->
+	<Block x="20" y="95" line = "{CHECKFILL.WMI.Volume.Label:1} This is only shown if the command '{CHECKFILL.WMI.Volume.Label:1}' returned data" />
+	<!-- CONVERSION ROUTINES -->
+	<Block x="20" y="110" line = "HD0 Size: {CONV.BGB.WMI.Volume.Capacity:0}" /> <!-- B ytes->Gigabytes -->
+	<Block x="20" y="125" line = "Processes: {WMI.OperatingSystem.NumberOfProcesses}" />
+	<Block x="20" y="140" line = "Network adapter: {WMI.NetworkAdapter.Name:13} Speed: {CONV.BMB.WMI.NetworkAdapter.Speed:13}"  />
+	
+  </Blocks>
+</WonkyConfig>
+}}}
