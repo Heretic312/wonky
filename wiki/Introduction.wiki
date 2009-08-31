@@ -13,6 +13,7 @@ Still under a lot of construction, but so far it implements the following:
   * Helper utilities for converting between bytes/kilobytes etc
   * Helper utilities for trimming and manipulating text
   * Data caching for speed
+  * Support for reading Everest values
 
 There's still _a lot_ more to be done, and if you can submit as many bugs/feature requests as possible!
 
@@ -47,3 +48,9 @@ to include a picture into your configuration you could do this:
 {{{
 	<Block x="0" y="0" w="24" h="24" line="{IMAGE.'Win.png'}" />
 }}}
+
+=== Everest ===
+Reading Everest values is quite simple, the included application _Everest Values.exe_ will tell you the code to use for each sensor, for example for my pc to get the temperature of core1 i would use 
+{{{
+       <Block x="50" y="153" FontSize="8" line="{EVEREST.TCC-1-1}" />
+}}} 
