@@ -22,6 +22,8 @@ For an example configuration file check out [ExampleXML]
 
 == Notes ==
 
+=== WMI ===
+
 Commands in the line="" blocks in the configuration are surrounded by {'s for example to get the cpu name using WMI the following code would work
 {{{
 	<Block x="50" y="43" FontSize="8" line="{WMI.Processor.Name}" />
@@ -38,10 +40,14 @@ Further more some responses include multiple instances with multiple lines follo
 	<Block x="50" y="143" FontSize="8" line="ipv4: {WMI.NetworkAdapterConfiguration.IPAddress:13} | ipv6: {WMI.NetworkAdapterConfiguration.IPAddress:13:1}" />
 }}}
 
-The above examples stay true from program execution, another example is if i wanted to get my externalip from a vbscript (ExternalIP.vbs is included in the zip) i would use the following code:
+=== Program execution ===
+
+The above examples stay true for program execution, another example is if i wanted to get my externalip from a vbscript (ExternalIP.vbs is included in the zip) i would use the following code:
 {{{
         <Block x="50" y="125" FontSize="8" line="External IP: {EXEC.'cscript.exe ExternalIP.vbs //Nologo'}" />
 }}}
+
+=== Images ===
 
 That covers the major 2 components, now for a couple of small ones
 to include a picture into your configuration you could do this:
