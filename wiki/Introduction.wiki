@@ -1,6 +1,9 @@
 #summary An introduction to wonky MORE NEEDED
 #labels Featured
 
+= Table of contents =
+<wiki:toc max_depth="3" />
+
 = Introduction =
 
 Wonky is a windows .NET executable capable of showing your system statistics(and whatever else you may like) on your desktop, It's somewhat similar to Conky (for linux).
