@@ -1,0 +1,62 @@
+# Table of contents #
+
+
+# Introduction #
+
+Wonky is a windows .NET executable capable of showing your system statistics(and whatever else you may like) on your desktop, It's somewhat similar to Conky (for linux).
+
+Still under a lot of construction, but so far it implements the following:
+  * WMI
+  * Executing programs/Scripts
+  * Using custom images
+  * Full XML configuration
+  * Helper utilities for converting between bytes/kilobytes etc
+  * Helper utilities for trimming and manipulating text
+  * Data caching for speed
+  * Support for reading Everest values
+
+There's still _a lot_ more to be done, and if you can submit as many bugs/feature requests as possible!
+
+For an example configuration file check out [ExampleXML](ExampleXML.md)
+
+
+## Notes ##
+
+### WMI ###
+
+Commands in the line="" blocks in the configuration are surrounded by {'s for example to get the cpu name using WMI the following code would work
+```
+	<Block x="50" y="43" FontSize="8" line="{WMI.Processor.Name}" />
+```
+Quite a few WMI responses return multiple lines thats when : comes into play
+for example if your computer has multiple network adapters (it will) then WMI
+returns an instance for each
+adapter. So if my card was number 13 (NetworkAdapters.exe included in the zip will tell you your card number) then i would use the following code:
+```
+	<Block x="50" y="123" FontSize="8" line="{WMI.NetworkAdapter.Name:13}" />
+```
+Further more some responses include multiple instances with multiple lines following the same suite this code would work to get your IPV4/IPV6 address for your selected adapter
+```
+	<Block x="50" y="143" FontSize="8" line="ipv4: {WMI.NetworkAdapterConfiguration.IPAddress:13} | ipv6: {WMI.NetworkAdapterConfiguration.IPAddress:13:1}" />
+```
+
+### Program execution ###
+
+The above examples stay true for program execution, another example is if i wanted to get my externalip from a vbscript (ExternalIP.vbs is included in the zip) i would use the following code:
+```
+        <Block x="50" y="125" FontSize="8" line="External IP: {EXEC.'cscript.exe ExternalIP.vbs //Nologo'}" />
+```
+
+### Images ###
+
+That covers the major 2 components, now for a couple of small ones
+to include a picture into your configuration you could do this:
+```
+	<Block x="0" y="0" w="24" h="24" line="{IMAGE.'Win.png'}" />
+```
+
+### Everest ###
+Reading Everest values is quite simple, the included application _Everest Values.exe_ will tell you the code to use for each sensor, for example for my pc to get the temperature of core1 i would use
+```
+       <Block x="50" y="153" FontSize="8" line="{EVEREST.TCC-1-1}" />
+```
